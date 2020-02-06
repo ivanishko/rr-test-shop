@@ -1,13 +1,18 @@
 <template>
   <div id="app">
-    {{msg}}
+    <Header />
+    <router-view></router-view>
   </div>
 </template>
 
 <script>
+import Header from "./assets/components/Header";
 export default {
   name: 'app',
-  data () {
+    components: {
+      Header
+    },
+    data () {
     return {
       msg: 'Hello!'
     }
@@ -20,9 +25,12 @@ export default {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+  max-width: 1200px;
+  margin: 0 auto;
+
+  border: 1px solid #42b983;
+
 }
 
 h1, h2 {
