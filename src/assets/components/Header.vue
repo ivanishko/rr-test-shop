@@ -1,7 +1,10 @@
 <template>
 <div class="header">
   <div class="logo">
-      <div class="logo__square"></div><span class="logo__title">Logo</span>
+    <router-link :to="{name: 'main'}">
+      <div class="logo__square"></div>
+      <span class="logo__title">Logo</span>
+    </router-link>
   </div>
   <div class="menu">
     <router-link active-class="active" :to="{name: 'catalog'}">Каталог</router-link>
@@ -23,7 +26,7 @@
 
 <style lang="scss" scoped>
   .header {
-    border: 1px solid #2c3e50;
+    border-bottom: 1px solid #42b983;
     display: flex;
     justify-content: space-around;
   }
