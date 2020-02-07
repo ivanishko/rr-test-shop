@@ -9,7 +9,7 @@
     <router-link active-class="active" :to="{name: 'Catalog'}">Каталог</router-link>
     <router-link active-class="active" :to="{name: 'About'}">О нас</router-link>
   </div>
-    <router-link active-class="active" :to="{name: 'Checkout'}">Корзина</router-link>
+    <router-link active-class="active" :to="{name: 'Checkout'}">Корзина<span class="checkout_count">{{cnt}}</span></router-link>
   <div>
 
   </div>
@@ -19,7 +19,13 @@
 
 <script>
     export default {
-        name: "Header"
+        name: "Header",
+        computed: {
+            cnt(){
+                return this.$store.state.cnt;
+            }
+    }
+
     }
 </script>
 
@@ -37,6 +43,9 @@
       font-weight: 700;
       text-transform: uppercase;
     }
+  }
+  .checkout_count {
+    border: 1px solid #42b983;
   }
   a {
     text-decoration: none;

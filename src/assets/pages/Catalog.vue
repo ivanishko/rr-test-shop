@@ -19,7 +19,7 @@
       <div v-for="color in product.colors" class="color-box" :style="{backgroundColor: color}"></div>
     </div>
     <p>{{product.cost | formatPrice}}</p>
-    <button>В корзину</button>
+    <button @click="addToCart">В корзину</button>
   </div>
 </div>
 
@@ -27,23 +27,29 @@
 </template>
 
 <script>
-    import axios from 'axios'
+    import {mapGetters} from 'vuex';
+    import {mapMutations} from 'vuex';
 
     export default {
         name: "Catalog",
 
         data() {
           return {
-              products: {},
-              cart: []
           }
         },
+        computed: {
+            ...mapGetters([
+                'products'
+            ])
+        },
         created: function () {
-            axios.get('items.json')
-                .then(response => (
-                    this.products = response.data.items)
-                );
-                  console.log(this.products);
+            this.$store.dispatch('initStore');
+
+        },
+        methods: {
+            ...mapMutations([
+                'addToCart'
+            ])
         },
         filters: {
             formatPrice: function (price) {
