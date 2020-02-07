@@ -9,7 +9,7 @@
     <router-link active-class="active" :to="{name: 'Catalog'}">Каталог</router-link>
     <router-link active-class="active" :to="{name: 'About'}">О нас</router-link>
   </div>
-    <router-link active-class="active" :to="{name: 'Checkout'}">Корзина<span class="checkout_count">{{cnt}}</span></router-link>
+    <router-link active-class="active" :to="{name: 'Cart'}">Корзина<span class="checkout_count">{{cnt}}</span></router-link>
   <div>
 
   </div>
@@ -18,13 +18,15 @@
 </template>
 
 <script>
+    import {mapGetters} from 'vuex';
     export default {
         name: "Header",
         computed: {
-            cnt(){
-                return this.$store.state.cnt;
+            ...mapGetters('cart', {
+                cnt: 'cnt'
             }
-    }
+            )
+        }
 
     }
 </script>

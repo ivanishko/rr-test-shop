@@ -6,7 +6,7 @@ Vue.use(VueRouter);
 import Main from "./pages/Main";
 import Catalog from "./pages/Catalog";
 import About from "./pages/About";
-import Checkout from "./pages/Checkout";
+import Cart from "./pages/Cart";
 import E404 from "./pages/E404";
 
 const routes = [
@@ -26,9 +26,9 @@ const routes = [
       component: About
     },
     {
-      path: '/checkout',
-      name: 'Checkout',
-      component: Checkout
+      path: '/cart',
+      name: 'Cart',
+      component: Cart
     },
     {
       path: '*',

@@ -19,7 +19,7 @@
       <div v-for="color in product.colors" class="color-box" :style="{backgroundColor: color}"></div>
     </div>
     <p>{{product.cost | formatPrice}}</p>
-    <button @click="addToCart">В корзину</button>
+    <button @click="addToCart(product.id)">В корзину</button>
   </div>
 </div>
 
@@ -28,6 +28,7 @@
 
 <script>
     import {mapGetters} from 'vuex';
+    import {mapActions} from 'vuex';
     import {mapMutations} from 'vuex';
 
     export default {
@@ -38,18 +39,22 @@
           }
         },
         computed: {
-            ...mapGetters([
-                'products'
-            ])
+            ...mapGetters('products', {
+                products: 'items'
+            }
+            )
         },
         created: function () {
-            this.$store.dispatch('initStore');
-
+            this.$store.dispatch('products/initStore');
         },
         methods: {
-            ...mapMutations([
-                'addToCart'
-            ])
+            ...mapActions('cart',
+                {
+                    addToCart: 'add',
+                    initStore: 'initStore'
+
+                }
+            )
         },
         filters: {
             formatPrice: function (price) {
