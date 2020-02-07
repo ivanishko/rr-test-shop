@@ -11,16 +11,16 @@
     </div>
   </div>
 <div class="products">
-  <div class="products__item" v-for="product in products" :key="product.id">
-    <img v-bind:src="'images/' + product.img" />
-    <h3 v-text="product.title"></h3>
-    <p v-html="product.description"> </p>
-    <div class="colors">Цвет:
-      <div v-for="color in product.colors" class="color-box" :style="{backgroundColor: color}"></div>
-    </div>
-    <p>{{product.cost | formatPrice}}</p>
-    <button @click="addToCart(product.id)">В корзину</button>
-  </div>
+  <product
+    v-for="product in products"
+    :key="product.id"
+    :product_id="product.id"
+    :title="product.title"
+    :image="product.img"
+    :description="product.description"
+    :colors="product.colors"
+    :cost="product.cost"
+  ></product>
 </div>
 
 </div>
@@ -30,10 +30,11 @@
     import {mapGetters} from 'vuex';
     import {mapActions} from 'vuex';
     import {mapMutations} from 'vuex';
+    import Product from "../components/Product";
 
     export default {
         name: "Catalog",
-
+        components: {Product},
         data() {
           return {
           }
@@ -50,17 +51,11 @@
         methods: {
             ...mapActions('cart',
                 {
-                    addToCart: 'add',
                     initStore: 'initStore'
-
                 }
             )
-        },
-        filters: {
-            formatPrice: function (price) {
-                return  price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ") + " ₽" ;
-            }
         }
+
 
     };
 
@@ -83,18 +78,7 @@
       flex-direction: column;
       justify-content: space-between;
     }
-    .colors{
-      display:  flex;
 
-    }
-    .color-box {
-      border:1px solid #d7d2d7;
-      border-radius: 10px;
-      width: 20px;
-      height: 20px;
-      margin: 0 3px;
-
-    }
   }
   button {
     width: 100%;

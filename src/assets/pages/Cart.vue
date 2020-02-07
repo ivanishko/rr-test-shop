@@ -4,7 +4,8 @@
     <div v-if="cnt === 0">Добавьте товары в корзину</div>
     <div v-else>
       <div v-for="product in products">
-        <span>{{product}}</span>
+        <span>{{product.id}}</span>
+        <span>{{product.color}}</span>
         <button @click="deleteFromCart(product)">X</button>
       </div>
     </div>

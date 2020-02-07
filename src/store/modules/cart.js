@@ -5,9 +5,11 @@ export default {
 
   },
   mutations: {
-    add(state, id_product) {
-      if (state.products.indexOf(id_product) === -1) {
-        state.products.push(id_product);
+    add(state, product) {
+      if (state.products.indexOf(product) === -1) {
+        state.products.push(
+          product
+        );
       }
     },
     delete(state, id_product) {
@@ -19,8 +21,8 @@ export default {
     }
   },
   actions: {
-    add(store, id_product) {
-      store.commit('add', id_product);
+    add(store, product) {
+      store.commit('add', product);
     },
     delete(store, id_product) {
       store.commit('delete', id_product);
