@@ -1,16 +1,27 @@
 <template>
-  <div id="app">
-    <Header />
-    <router-view></router-view>
+
+    <div id="app">
+      <div class="wrapper">
+      <Header />
+      <router-view></router-view>
+
+
+      </div>
+        <Footer />
+
   </div>
+
+
 </template>
 
 <script>
 import Header from "./assets/components/Header";
+import Footer from "./assets/components/Footer";
 export default {
   name: 'app',
     components: {
-      Header
+        Header,
+        Footer
     },
     data () {
     return {
@@ -26,11 +37,16 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
+  margin: 0;
+  padding: 0;
+
+}
+
+.wrapper {
+
+  border-bottom: 1px solid #42b983;
   max-width: 1200px;
   margin: 0 auto;
-
-  border: 1px solid #42b983;
-
 }
 
 h1, h2 {
@@ -50,4 +66,23 @@ li {
 a {
   color: #42b983;
 }
+
+.about {
+  display: flex;
+
+  &__description {
+    display: flex;
+    flex: 1 1 33%;
+
+    h2 {
+      font-size: 32px;
+      font-weight: bold;
+    }
+  }
+
+  &__text {
+    flex: 2 2 66%;
+  }
+}
+
 </style>

@@ -12,22 +12,22 @@ import E404 from "./pages/E404";
 const routes = [
     {
       path: '/',
-      name: 'main',
+      name: 'Main',
       component: Main
     },
     {
       path: '/catalog',
-      name: 'catalog',
+      name: 'Catalog',
       component: Catalog
     },
     {
       path: '/about',
-      name: 'about',
+      name: 'About',
       component: About
     },
     {
       path: '/checkout',
-      name: 'checkout',
+      name: 'Checkout',
       component: Checkout
     },
     {

@@ -1,16 +1,15 @@
 <template>
 <div class="header">
   <div class="logo">
-    <router-link :to="{name: 'main'}">
-      <div class="logo__square"></div>
+    <router-link :to="{name: 'Main'}">
       <span class="logo__title">Logo</span>
     </router-link>
   </div>
   <div class="menu">
-    <router-link active-class="active" :to="{name: 'catalog'}">Каталог</router-link>
-    <router-link active-class="active" :to="{name: 'about'}">О нас</router-link>
+    <router-link active-class="active" :to="{name: 'Catalog'}">Каталог</router-link>
+    <router-link active-class="active" :to="{name: 'About'}">О нас</router-link>
   </div>
-    <router-link active-class="active" :to="{name: 'checkout'}">Корзина</router-link>
+    <router-link active-class="active" :to="{name: 'Checkout'}">Корзина</router-link>
   <div>
 
   </div>
@@ -34,13 +33,8 @@
   .logo {
     display: inline-block;
 
-
-    &__square {
-      width: 20px;
-      height: 20px;
-      background: black;
-    }
     &__title {
+      font-weight: 700;
       text-transform: uppercase;
     }
   }
