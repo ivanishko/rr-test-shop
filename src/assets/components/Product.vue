@@ -1,23 +1,22 @@
 <template>
   <div class="products__item">
-    {{product_id}}
-    <img v-bind:src="'images/' + image" />
+    <img class="item_image" v-bind:src="'images/' + image" />
         <h3 v-text="title"></h3>
         <p v-html="description"> </p>
         <div class="colors">Цвет:
-      <label
-        v-for="color in getColors"
-        :for="color + product_id"
-        class="color-box"
+      <div
+        v-for="(color, i) in getColors"
+        @click="active = i, checkColor(product_id,color,title,description,image)"
+        :key="color + product_id"
+        class="color_box"
+        :class="{ active: i === active }"
         :style="{backgroundColor: color}"
-        @click="checkColor(product_id,color)"
       >
-        <input type="radio" :name="product_id" :id="color + product_id" />
-      </label>
-
-        </div>
+      </div>
+    </div>
         <p>{{cost | formatPrice}}</p>
-        <button @click="addToCart(checkedProduct)" :disabled="!isChecked">В корзину</button>
+        <button v-if="!isChecked" :disabled="!isChecked">Выберите цвет</button>
+        <button v-else @click="addToCart(checkedProduct)">В корзину</button>
   </div>
 </template>
 
@@ -38,7 +37,8 @@
             return {
                 isChecked : false,
                 checkedColor: '',
-                checkedProduct: {}
+                checkedProduct: {},
+                active: null,
             }
 
         },
@@ -56,20 +56,24 @@
             ...mapActions('cart',
                 {
                     addToCart: 'add'
-                }),
-            checkColor(id,color){
+            }),
+            checkColor(id,color,title,description,image){
                 this.isChecked = true;
                 this.checkedColor = color;
+                this.activeClass = 'color-box-checked';
 
                 this.checkedProduct = {
                     id,
-                    color
+                    color,
+                    title,
+                    description,
+                    image
                 }
             }
         },
         filters: {
             formatPrice: function (price) {
-                return  price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ") + " ₽" ;
+                return  price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ") + " руб." ;
             }
         }
 
@@ -80,22 +84,26 @@
 <style lang="scss" scoped>
   .colors{
     display:  flex;
+    align-items: center;
 
   }
-  .color-box {
+    .item_image {
+      max-width: 250px;
+  }
+   .color_box {
 
     border:1px solid #d7d2d7;
 
-    border-radius: 10px;
-    width: 20px;
-    height: 20px;
+    border-radius: 11px;
+    width: 21px;
+    height: 21px;
     margin: 0 3px;
     cursor: pointer;
-  input {
-  //display: none;
-    cursor: pointer;
+
   }
 
+  .active {
+    border:3px solid green;
   }
 
 </style>

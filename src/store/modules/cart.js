@@ -27,6 +27,7 @@ export default {
     delete(store, id_product) {
       store.commit('delete', id_product);
     }
+
   },
   getters: {
     items: state => state.products,

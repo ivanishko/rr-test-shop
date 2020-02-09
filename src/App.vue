@@ -40,12 +40,14 @@ export default {
   margin: 0;
   padding: 0;
 
+  font-size: 12px;
+
 }
 
 .wrapper {
 
   border-bottom: 1px solid #42b983;
-  max-width: 1200px;
+  max-width: 960px;
   margin: 0 auto;
 }
 
