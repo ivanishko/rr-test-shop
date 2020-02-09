@@ -6,10 +6,10 @@
     </router-link>
   </div>
   <div class="menu">
-    <router-link active-class="active" :to="{name: 'Catalog'}">Каталог</router-link>
-    <router-link active-class="active" :to="{name: 'About'}">О нас</router-link>
+    <router-link active-class="active-link" :to="{name: 'Catalog'}">Каталог</router-link>
+    <router-link active-class="active-link" :to="{name: 'About'}">О нас</router-link>
   </div>
-    <router-link active-class="active" :to="{name: 'Cart'}">Корзина<span class="checkout_count">{{cnt}}</span></router-link>
+    <router-link active-class="active-link" :to="{name: 'Cart'}">Корзина<span class="checkout_count">{{cnt}}</span></router-link>
   <div>
 
   </div>
@@ -53,7 +53,7 @@
     text-decoration: none;
   }
 
-  .active {
+  .active-link {
     text-decoration: underline;
   }
 </style>

@@ -1,5 +1,6 @@
 <template>
   <div class="products__item">
+    {{product_id}}
     <img class="item_image" v-bind:src="'images/' + image" />
         <h3 v-text="title"></h3>
         <p v-html="description"> </p>
@@ -9,7 +10,7 @@
         @click="active = i, checkColor(product_id,color,title,description,image)"
         :key="color + product_id"
         class="color_box"
-        :class="{ active: i === active }"
+        :class="{ 'active-color': i === active }"
         :style="{backgroundColor: color}"
       >
       </div>
@@ -60,8 +61,6 @@
             checkColor(id,color,title,description,image){
                 this.isChecked = true;
                 this.checkedColor = color;
-                this.activeClass = 'color-box-checked';
-
                 this.checkedProduct = {
                     id,
                     color,
@@ -82,23 +81,10 @@
 </script>
 
 <style lang="scss" scoped>
-  .colors{
-    display:  flex;
-    align-items: center;
-  }
+
     .item_image {
       max-width: 250px;
   }
-   .color_box {
-    border:1px solid #d7d2d7;
-    border-radius: 11px;
-    width: 21px;
-    height: 21px;
-    margin: 0 3px;
-    cursor: pointer;
-  }
-  .active {
-    border:3px solid green;
-  }
+
 
 </style>

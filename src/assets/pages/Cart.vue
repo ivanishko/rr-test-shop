@@ -7,6 +7,7 @@
         <img :src="'images/' + product.image" />
         <h2 v-text="product.title"></h2>
         <p>{{product.description}}</p>
+        <p>{{product.cost}}</p>
         <div class="color">Цвет:
           <div class="color__box"  :style="{backgroundColor: product.color}"></div>
         </div>

@@ -1,14 +1,11 @@
 <template>
 
-    <div id="app">
-      <div class="wrapper">
+  <div id="app">
+    <div class="wrapper">
       <Header />
       <router-view></router-view>
-
-
-      </div>
-        <Footer />
-
+    </div>
+      <Footer />
   </div>
 
 
@@ -87,4 +84,20 @@ a {
   }
 }
 
+  .colors{
+    display:  flex;
+    align-items: center;
+  }
+
+  .color_box {
+    border:2px solid #d7d2d7;
+    border-radius: 10px;
+    width: 20px;
+    height: 20px;
+    margin: 0 3px;
+    cursor: pointer;
+  }
+  .active-color {
+    border:2px solid green;
+  }
 </style>

@@ -17,7 +17,7 @@ export default {
     initStore: ({commit}) => {
       axios.get('items.json')
         .then(response => {
-          console.log(response.data.items);
+          //console.log(response.data.items);
           commit('SET_STORE', response.data.items)
         });
     },
