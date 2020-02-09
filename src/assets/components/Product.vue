@@ -85,23 +85,18 @@
   .colors{
     display:  flex;
     align-items: center;
-
   }
     .item_image {
       max-width: 250px;
   }
    .color_box {
-
     border:1px solid #d7d2d7;
-
     border-radius: 11px;
     width: 21px;
     height: 21px;
     margin: 0 3px;
     cursor: pointer;
-
   }
-
   .active {
     border:3px solid green;
   }

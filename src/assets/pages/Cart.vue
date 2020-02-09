@@ -3,7 +3,7 @@
     <h1>Корзина</h1>
     <div v-if="cnt === 0">Добавьте товары в корзину</div>
     <div v-else>
-      <div class="cart__item" v-for="product in products" :key="product.id">
+      <div class="cart__item" v-for="(product, i) in products" :key="i">
         <img :src="'images/' + product.image" />
         <h2 v-text="product.title"></h2>
         <p>{{product.description}}</p>
