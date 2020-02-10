@@ -9,7 +9,7 @@
     <router-link active-class="active-link" :to="{name: 'Catalog'}">Каталог</router-link>
     <router-link active-class="active-link" :to="{name: 'About'}">О нас</router-link>
   </div>
-    <router-link active-class="active-link" :to="{name: 'Cart'}">Корзина<span class="checkout_count">{{cnt}}</span></router-link>
+    <div><router-link active-class="active-link" :to="{name: 'Cart'}">Корзина</router-link><span class="checkout_count">{{cnt}}</span></div>
   <div>
 
   </div>
@@ -36,6 +36,7 @@
     border-bottom: 1px solid #42b983;
     display: flex;
     justify-content: space-around;
+    padding-bottom: 10px;
   }
 
   .logo {
@@ -48,12 +49,17 @@
   }
   .checkout_count {
     border: 1px solid #42b983;
+    padding: 0 5px;
+    text-decoration: none;
+    margin-left: 5px;
+
   }
+  .active-link {
+         text-decoration: underline;
+       }
   a {
     text-decoration: none;
   }
 
-  .active-link {
-    text-decoration: underline;
-  }
+
 </style>
