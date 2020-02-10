@@ -7,7 +7,7 @@
         <div class="colors">Цвет:
       <div
         v-for="(color, i) in getColors"
-        @click="active = i, checkColor(product_id,color,title,description,image)"
+        @click="active = i, checkColor(product_id,color,title,description,image, cost)"
         :key="color + product_id"
         class="color_box"
         :class="{ 'active-color': i === active }"
@@ -47,7 +47,7 @@
             getColors() {
                 if ( typeof this.colors === 'string') {
                       let arr = [];
-                      arr.push(this.colors)
+                      arr.push(this.colors);
                       return arr;
                 }
                 else {return this.colors}
@@ -58,7 +58,7 @@
                 {
                     addToCart: 'add'
             }),
-            checkColor(id,color,title,description,image){
+            checkColor(id,color,title,description,image, cost){
                 this.isChecked = true;
                 this.checkedColor = color;
                 this.checkedProduct = {
@@ -66,13 +66,14 @@
                     color,
                     title,
                     description,
-                    image
+                    image,
+                    cost
                 }
             }
         },
         filters: {
             formatPrice: function (price) {
-                return  price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ") + " руб." ;
+                return  price.replace(/\B(?=(\d{3})+(?!\d))/g, " ") + " руб." ;
             }
         }
 

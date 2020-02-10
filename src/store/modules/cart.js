@@ -31,7 +31,10 @@ export default {
   },
   getters: {
     items: state => state.products,
-    cnt: state => state.products.length
+    cnt: state => state.products.length,
+    total: state => state.products.reduce((sum, current) => {return sum + parseInt(current.cost)}, 0)
+
+      }
   }
-}
+
 

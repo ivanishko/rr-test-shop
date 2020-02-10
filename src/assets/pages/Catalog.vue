@@ -10,24 +10,44 @@
       <p>Дизайнеры прибегают к применению природных и промышленных материалов с малыми объёмами</p>
     </div>
   </div>
-  <div class="colors">Выберете цвет:
-    <div v-for="(color, i) in colors" class="color_box" :style="{background: color}" :key="i" @click="checkMode(color)"></div>
-    <div class="color-link"  @click="checkMode('all')">Все</div>
-  </div>  
-  <p v-if="checkedId.length === 0">Нет товаров с выбранными параметрами</p>
-<div v-else>
-  <div class="products">
-  <product
-    v-for="product in sorteredProducts"
-    :key="product.id"
-    :product_id="product.id"
-    :title="product.title"
-    :image="product.img"
-    :description="product.description"
-    :colors="product.colors"
-    :cost="product.cost"
-  ></product>
+  <div class="check">
+    <div class="check-colors">Выберите цвет:
+      <div v-for="(color, i) in colors"
+           class="color_box"
+           :class="{ 'active-color': i === active }"
+           :style="{background: color}"
+           :key="i" @click="active = i, checkMode(color)">
+      </div>
+      <div
+        class="color-link"
+        :class="{ 'active-color': 'all' === active }"
+        @click="active = 'all', checkMode('all')">
+        Все
+      </div>
+    </div>
+    <div class="check-price">
+        Цена (Р):
+      <input type="text" :v-model="minprice" :value="minprice">
+      <input type="text" :v-model="maxprice" :value="maxprice">
+    </div>
   </div>
+
+  <div v-if="checkedId.length === 0">
+    <p>Нет товаров с выбранными параметрами</p>
+  </div>
+  <div v-else>
+    <div class="products">
+      <Product
+        v-for="product in sorteredProducts"
+        :key="product.id"
+        :product_id="product.id"
+        :title="product.title"
+        :image="product.img"
+        :description="product.description"
+        :colors="product.colors"
+        :cost="product.cost"
+      ></Product>
+    </div>
 </div>
 
 </div>
@@ -42,13 +62,16 @@
     export default {
         name: "Catalog",
         components: {Product},
-      
+
         data() {
           return {
-            mode: 'all',
-            colors: ["black", "white", "red", "blue", "green"],
-            sorteredProducts: [],
-            checkedId: []
+              active: null,
+              mode: 'all',
+              colors: ["black", "white", "red", "blue", "green"],
+              sorteredProducts: [],
+              checkedId: [],
+              minprice: 1000,
+              maxprice: 50000
           }
         },
         computed: {
@@ -60,6 +83,9 @@
         created: function () {
             this.$store.dispatch('products/initStore');
             this.sorteredProducts = this.products;
+            this.checkedId = ["001"];
+            this.checkMode('all');
+            console.log('created!!!');
 
         },
         methods: {
@@ -69,29 +95,24 @@
                 }
             ),
             checkMode(color) {
-              //  if (color = 'all') {
-              //   this.sorteredProducts  = this.products;
-              //  }
-              this.mode = color;
-              console.log(this.mode);
-              this.sorteredProducts =  this.products.filter((elem) => {
-
-               // console.log(elem.colors);
-              if  (elem.colors.indexOf(color) !== -1) {
-                this.checkedId.push(elem.id);
-                  return elem;
-              } 
-              // console.log(this.checkedId);
-
-             // console.log(this.sorteredProducts);
-              })
-              
+                if (color === 'all') {
+                    this.mode = 'all';
+                    this.sorteredProducts = this.products;
+                    this.checkedId = ["001"];
+                    return true;
+                } else {
+                    this.mode = color;
+                    this.checkedId = [];
+                    this.sorteredProducts = this.products.filter((elem) => {
+                        if (elem.colors.indexOf(color) !== -1) {
+                            this.checkedId.push(elem.id);
+                            return elem;
+                        }
+                    })
+                }
             }
           }
-    
     };
-
-
 
 </script>
 
@@ -127,9 +148,28 @@
     cursor:pointer;
     font-size:14px;
   }
-  .color-link {
-    cursor: pointer;
-    text-decoration: underline;
-}
+
+
+
+  .check {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    padding: 20px 10px;
+    background: #d7d2d7;
+    .check-colors {
+      display: flex;
+      flex: 1 1 50%;
+
+    }
+    .check-price {
+      display: flex;
+      flex: 1 1 50%;
+      align-items: center;
+      input {
+        margin: 0 10px;
+      }
+    }
+  }
 
 </style>

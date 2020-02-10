@@ -37,7 +37,7 @@ export default {
   margin: 0;
   padding: 0;
 
-  font-size: 12px;
+  font-size: 14px;
 
 }
 
@@ -97,7 +97,14 @@ a {
     margin: 0 3px;
     cursor: pointer;
   }
+.color-link {
+  cursor: pointer;
+  text-decoration: underline;
+  border: 2px solid #d7d2d7;
+
+}
   .active-color {
     border:2px solid green;
   }
+
 </style>
