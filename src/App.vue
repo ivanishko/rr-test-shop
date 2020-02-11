@@ -7,8 +7,6 @@
     </div>
       <Footer />
   </div>
-
-
 </template>
 
 <script>
@@ -36,13 +34,10 @@ export default {
   color: #2c3e50;
   margin: 0;
   padding: 0;
-
   font-size: 14px;
-
 }
 
 .wrapper {
-
   border-bottom: 1px solid #42b983;
   max-width: 960px;
   margin: 0 auto;
@@ -82,8 +77,16 @@ a {
   &__text {
     flex: 2 2 66%;
   }
-}
+    &__bottom{
+      display: flex;
+      align-items: flex-end;
 
+
+      &-item {
+        flex: 1 1 33%;
+      }
+    }
+}
   .colors{
     display:  flex;
     align-items: center;
@@ -104,7 +107,7 @@ a {
 
 }
   .active-color {
-    border:2px solid green;
+    border:2px solid #42b983;
   }
 
 </style>
