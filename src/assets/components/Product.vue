@@ -1,6 +1,5 @@
 <template>
   <div class="products__item">
-    {{product_id}}
     <img class="item_image" v-bind:src="'images/' + image" />
         <h3 v-text="title"></h3>
         <p v-html="description"> </p>

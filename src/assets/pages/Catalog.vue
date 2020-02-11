@@ -14,25 +14,27 @@
     <div class="check-colors">Выберите цвет:
       <div v-for="(color, i) in colors"
            class="color_box"
-           :class="{ 'active-color': i === active }"
+           :class="{ 'active-color': color === activeColor }"
            :style="{background: color}"
-           :key="i" @click="active = i, checkMode(color)">
+           :key="i" @click="activeColor = color, sortProducts(color)">
       </div>
       <div
         class="color-link"
-        :class="{ 'active-color': 'all' === active }"
-        @click="active = 'all', checkMode('all')">
-        Все
+        :class="{ 'active-color': 'all' === activeColor }"
+        @click="activeColor = 'all', sortProducts('all')">
+        <span>Все</span>
       </div>
     </div>
-    <div class="check-price">
-        Цена (Р):
-      <input type="text" :v-model="minprice" :value="minprice">
-      <input type="text" :v-model="maxprice" :value="maxprice">
+    <div class="range-slider">
+      <input type="range" v-model.number="minPrice"  min="500" step="100"  max="50000" @change="setRangeSlider" />
+      <input type="range" v-model.number="maxPrice"  min="500" step="100"  max="50000" @change="setRangeSlider" />
+    </div>
+    <div class="range-values">
+      <p>Min: {{minPrice}} - Max: {{maxPrice}}</p>
     </div>
   </div>
 
-  <div v-if="checkedId.length === 0">
+  <div v-if="sorteredProducts.length === 0">
     <p>Нет товаров с выбранными параметрами</p>
   </div>
   <div v-else>
@@ -65,13 +67,12 @@
 
         data() {
           return {
-              active: null,
+              activeColor: '',
               mode: 'all',
               colors: ["black", "white", "red", "blue", "green"],
               sorteredProducts: [],
-              checkedId: [],
-              minprice: 1000,
-              maxprice: 50000
+              minPrice: 500,
+              maxPrice: 50000
           }
         },
         computed: {
@@ -82,9 +83,8 @@
         },
         created: function () {
             this.$store.dispatch('products/initStore');
-            this.sorteredProducts = this.products;
-            this.checkedId = ["001"];
-            this.checkMode('all');
+            this.sorteredProducts = [...this.products];
+            //this.sortProducts('all', this.minPrice, this.maxPrice);
             console.log('created!!!');
 
         },
@@ -94,25 +94,46 @@
                     initStore: 'initStore'
                 }
             ),
-            checkMode(color) {
-                if (color === 'all') {
-                    this.mode = 'all';
-                    this.sorteredProducts = this.products;
-                    this.checkedId = ["001"];
-                    return true;
-                } else {
-                    this.mode = color;
-                    this.checkedId = [];
-                    this.sorteredProducts = this.products.filter((elem) => {
-                        if (elem.colors.indexOf(color) !== -1) {
-                            this.checkedId.push(elem.id);
-                            return elem;
-                        }
-                    })
+            setRangeSlider() {
+                if (this.minPrice > this.maxPrice) {
+                    let temp = this.maxPrice;
+                    this.maxPrice = this.minPrice;
+                    this.minPrice = temp;
                 }
+                this.sortProducts();
+            },
+            // sortProducts(color) {
+            //     if (color === 'all') {
+            //         this.sorteredProducts = [...this.products];
+            //         return true;
+            //     } else {
+            //
+            //         this.sorteredProducts = this.products.filter((elem) => {
+            //             if (elem.colors.indexOf(color) !== -1 && parseInt(elem.cost) >= this.minPrice && parseInt(elem.cost) <= this.maxPrice) {
+            //                 this.checkedId.push(elem.id);
+            //                 return elem;
+            //             }
+            //         })
+            //     }
+            // }
+            sortProducts() {
+                    this.sorteredProducts = [...this.products].filter((elem) => {
+                        if (this.activeColor !== 'all') {
+                            return (elem.colors.indexOf(this.activeColor) !== -1) && parseInt(elem.cost) >= this.minPrice && parseInt(elem.cost) <= this.maxPrice
+                        }
+                        else {
+                            return ( parseInt(elem.cost) >= this.minPrice && parseInt(elem.cost) <= this.maxPrice)
+                        }
+                        })
+                // if(color) {
+                //     this.sorteredProducts = this.sorteredProducts.filter((e) => {
+                //         if (e.colors.indexOf(color) !== -1)
+                //         {return e}
+                //     }
             }
-          }
-    };
+            }
+        };
+
 
 </script>
 
@@ -169,6 +190,30 @@
       input {
         margin: 0 10px;
       }
+    }
+
+    .filters{
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .range-slider {
+      width: 200px;
+      margin: auto 16px;
+      text-align: center;
+      position: relative;
+    }
+    .range-slider svg, .range-slider input[type=range] {
+      position: absolute;
+      left: 0;
+      bottom: 0;
+    }
+    input[type=range]::-webkit-slider-thumb {
+      z-index: 2;
+      position: relative;
+      top: 2px;
+      margin-top: -7px;
     }
   }
 

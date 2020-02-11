@@ -18,6 +18,9 @@ export default {
         state.products.splice(pos, 1);
 
       }
+    },
+    clear(state){
+      state.products = [];
     }
   },
   actions: {
@@ -26,6 +29,9 @@ export default {
     },
     delete(store, id_product) {
       store.commit('delete', id_product);
+    },
+    clear(store){
+      store.commit('clear');
     }
 
   },

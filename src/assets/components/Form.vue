@@ -4,36 +4,87 @@
       <div class="form-box__item"><span>Количество: </span> <span>{{cnt}}</span></div>
       <div class="form-box__item"><span>Доставка: </span> <span>{{delivery}}</span></div>
       <div class="form-box__item"><span>Итого: </span><span>{{total | formatPrice}}</span></div>
-      <div class="form-box__item"><input type="text" class="input-item" placeholder="ФИО" v-model="userName" /></div>
-      <div class="form-box__item"><input type="text" class="input-item" placeholder="Номер телефона" v-model="userPhone" /></div>
-      <div class="form-box__item"><button class="input-item" @click="send(userName,userPhone)">Заказать</button></div>
+      <div class="form-box__item"><input type="text" class="input-item" placeholder="ФИО" v-model="order.name" minlength="3" maxlength="20" pattern="[a-z]{3,20}"  /></div>
+      <div class="form-box__item"><input type="tel" v-phone class="input-item" placeholder="(555)555-5555" v-model="order.phone" name="phone" id="phone" maxlength="14"  /></div>
+      <div class="form-box__item"><button class="input-item" @click="send(order.name,order.phone)">Заказать</button></div>
     </div>
 </template>
 
 <script>
     import {mapGetters} from 'vuex';
+    import {mapActions} from 'vuex';
+
 
     export default {
         name: "Form",
         data() {
             return {
                 delivery: "Бесплатно",
-                userName: '',
-                userPhone: ''
+                order: {
+                    name: '',
+                    phone: ''
+                },
+                errors: []
             }
         },
         computed: {
             ...mapGetters('cart', {
                 cnt: 'cnt',
                 total: 'total',
-
             })
 
         },
+        directives: {
+
+            phone: {
+              bind(el) {
+                  el.oninput = function(e) {
+                      if (!e.isTrusted) {
+                          return;
+                      }
+                      let x = this.value.replace(/\D/g, '').match(/(\d{0,3})(\d{0,3})(\d{0,4})/);
+                      this.value = !x[2] ? x[1] : '(' + x[1] + ') ' + x[2] + (x[3] ? '-' + x[3] : '');
+                  }
+              }
+
+            }
+        },
         methods: {
             send(name,phone){
-                console.log('name,phone', name, phone);
-            }
+                this.errors = [];
+                if(!name) {
+                    this.errors.push('Укажите имя');
+                }
+                if(!phone) {
+                    this.errors.push('Укажите номер телефона');
+                }
+                if (name.length < 3) {
+                    this.errors.push('Имя не меньше 3 символов');
+                }
+                if (phone.length < 14) {
+                    this.errors.push('Номер телефона не заполнен');
+                }
+                function orderIsDone(name) {
+                    alert('Уважаемый '+ name + ', ' + 'Ваша заявка принята');
+
+                }
+                function orderErrors(errors) {
+                    alert(errors.join('\r\n'))
+                }
+                if (this.errors.length === 0) {
+                    setTimeout(orderIsDone,5000, name);
+                    setTimeout(this.clearCart,5000, '');
+
+
+                }
+                    else {
+                        setTimeout(orderErrors,100, this.errors);
+                    }
+            },
+            ...mapActions('cart',{
+                clearCart: 'clear'
+            })
+
         },
         filters: {
 
@@ -71,5 +122,10 @@
 h3 {
   text-align: center;
 }
+  .errors-list {
+    list-style: square;
+    display: block;
+    color: red;
+  }
 
 </style>

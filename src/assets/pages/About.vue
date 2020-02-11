@@ -9,14 +9,27 @@
             <p>Все конструкции отличаются высоким качеством</p>
         </div>
     </div>
-      <div class="about">
+    <div class="about">
         <div class="about__description">
           <h2>Больше, чем просто интернет-магазин мебели</h2>
         </div>
         <div class="about__text">
           <p>Возможность создать неповторимый интерьер квартиры, сделать обстановку дома уютней</p>
         </div>
+    </div>
+    <div class="about">
+      <div class="about__bottom">
+        <div class="about__bottom-item"></div>
+      <div class="about__bottom-item">
+        <h3>Модно</h3>
+        <p>Возможность создать неповторимый интерьер квартиры, сделать обстановку дома уютней</p>
       </div>
+      <div class="about__bottom-item">
+        <h3>Молодежно</h3>
+        <p>Возможность создать неповторимый интерьер квартиры, сделать обстановку дома уютней</p>
+      </div>
+      </div>
+    </div>
 
   </div>
 </template>
