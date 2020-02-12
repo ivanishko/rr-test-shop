@@ -110,12 +110,12 @@
     margin: 10px 5px;
     padding: 0 10px;
    }
-  .input-item {
+  input.input-item {
     width: 100%;
     height: 30px;
     font-size: 14px;
   }
-  button {
+  button.input-item {
     margin-top: 10px ;
   }
 }

@@ -15,7 +15,7 @@
       </div>
     </div>
         <p>{{cost | formatPrice}}</p>
-        <button v-if="!isChecked" :disabled="!isChecked">Выберите цвет</button>
+        <button v-if="!isChecked" :disabled="!isChecked" class="disabled">Выберите цвет</button>
         <button v-else @click="addToCart(checkedProduct)">В корзину</button>
   </div>
 </template>
@@ -84,7 +84,14 @@
 
     .item_image {
       max-width: 250px;
+      height: auto;
   }
+
+
+
+
+
+
 
 
 </style>

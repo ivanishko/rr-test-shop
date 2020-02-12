@@ -58,7 +58,6 @@
 <script>
     import {mapGetters} from 'vuex';
     import {mapActions} from 'vuex';
-    import {mapMutations} from 'vuex';
     import Product from "../components/Product";
 
     export default {
@@ -68,26 +67,28 @@
         data() {
           return {
               activeColor: '',
-              mode: 'all',
               colors: ["black", "white", "red", "blue", "green"],
               sorteredProducts: [],
-              minPrice: 500,
-              maxPrice: 50000
+              minPrice: '',
+              maxPrice: '',
           }
         },
         computed: {
             ...mapGetters('products', {
                 products: 'items'
-            }
-            )
+            })
         },
-        created: function () {
-            this.$store.dispatch('products/initStore');
-            this.sorteredProducts = [...this.products];
-            //this.sortProducts('all', this.minPrice, this.maxPrice);
-            console.log('created!!!');
+
+        mounted(){
+                this.$store.dispatch('products/initStore');
+                this.sorteredProducts = [...this.products];
+                this.activeColor = localStorage.getItem('activeColor') || 'all';
+                this.minPrice = localStorage.getItem('minPrice') || 500;
+                this.maxPrice = localStorage.getItem('maxPrice') || 50000;
+                this.sortProducts();
 
         },
+
         methods: {
             ...mapActions('cart',
                 {
@@ -102,20 +103,7 @@
                 }
                 this.sortProducts();
             },
-            // sortProducts(color) {
-            //     if (color === 'all') {
-            //         this.sorteredProducts = [...this.products];
-            //         return true;
-            //     } else {
-            //
-            //         this.sorteredProducts = this.products.filter((elem) => {
-            //             if (elem.colors.indexOf(color) !== -1 && parseInt(elem.cost) >= this.minPrice && parseInt(elem.cost) <= this.maxPrice) {
-            //                 this.checkedId.push(elem.id);
-            //                 return elem;
-            //             }
-            //         })
-            //     }
-            // }
+
             sortProducts() {
                     this.sorteredProducts = [...this.products].filter((elem) => {
                         if (this.activeColor !== 'all') {
@@ -124,15 +112,19 @@
                         else {
                             return ( parseInt(elem.cost) >= this.minPrice && parseInt(elem.cost) <= this.maxPrice)
                         }
-                        })
-                // if(color) {
-                //     this.sorteredProducts = this.sorteredProducts.filter((e) => {
-                //         if (e.colors.indexOf(color) !== -1)
-                //         {return e}
-                //     }
+                    })
+
             }
-            }
-        };
+        },
+
+        updated() {
+            localStorage.setItem('activeColor', this.activeColor);
+            localStorage.setItem('minPrice', this.minPrice);
+            localStorage.setItem('maxPrice', this.maxPrice);
+            localStorage.setItem('productsInCart', this.$store.state.products);
+
+        }
+    };
 
 
 </script>
@@ -142,13 +134,14 @@
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
+    justify-content: space-between;
 
     &__item {
-      padding: 10px;
-      margin: 5px;
-      max-width: 250px;
+      padding: 5px;
+      margin: 0 5px;
       flex:1 1 30%;
-      border-bottom: 1px solid #2c3e50;
+      max-width: 300px;
+      border-bottom: 1px solid #bebebe;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
@@ -161,22 +154,14 @@
     border-radius: 10px;
 
   }
-  button {
-    width: 100%;
-    height: 40px;
-    border: 1px solid #2c3e50;
-    color: #2c3e50;
-    cursor:pointer;
-    font-size:14px;
-  }
 
 
 
   .check {
     display: flex;
     flex-direction: row;
-    width: 100%;
-    padding: 20px 10px;
+    align-items: center;
+    padding:  10px;
     background: #d7d2d7;
     .check-colors {
       display: flex;

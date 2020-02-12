@@ -55,8 +55,9 @@
             formatPrice: function (price) {
                 return  price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ") + " руб." ;
             }
-        }
-        }
+        },
+
+    }
 
 </script>
 
@@ -73,6 +74,7 @@
     flex: 1 1 33%;
     margin: 10px;
   }
+
     .page-title {
       flex-grow: 1;
     }
@@ -93,7 +95,6 @@
           display: flex;
           flex: 1 1 50%;
 
-
         }
         .cart-info {
           display: flex;
@@ -104,10 +105,7 @@
           }
         }
       }
-
   }
-
-
 
 }
 
@@ -120,16 +118,21 @@
     width: 20px;
     height: 20px;
     margin: 0 5px;
-
+  }
 }
-}
 
 
-.icon-delete{
+button.icon-delete{
   position: absolute;
   top:0;
   right:0;
   cursor: pointer;
+  width: 25px;
+  height: 20px;
+  background: #ffffff;
+  :hover {
+    color: #2c3e50;
+  }
 }
 
 </style>
