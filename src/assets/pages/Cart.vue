@@ -69,37 +69,32 @@
       flex: 2 2 66%;
       margin-right: 10px;
   }
-
-  &__form{
+    &__form{
     flex: 1 1 33%;
     margin: 10px;
   }
-
     .page-title {
       flex-grow: 1;
     }
     .cart {
       display: flex;
       flex-direction: row;
-
       &__item {
         display: flex;
         flex-direction: row;
-
         border-bottom: 1px solid #bebebe;
         position: relative;
         padding: 10px 5px;
         margin-bottom: 10px;
 
-        .cart-image {
-          display: flex;
-          flex: 1 1 50%;
-
+          .cart-image {
+            display: flex;
+            flex: 1 1 50%;
         }
-        .cart-info {
-          display: flex;
-          flex: 1 1 50%;
-          flex-direction: column;
+          .cart-info {
+            display: flex;
+            flex: 1 1 50%;
+            flex-direction: column;
           .price {
             font-size: 32px;
           }

@@ -79,9 +79,9 @@
             })
         },
 
-        mounted(){
+        created(){
                 this.$store.dispatch('products/initStore');
-                this.sorteredProducts = [...this.products];
+                this.sorteredProducts = [...this.$store.state.products];
                 this.activeColor = localStorage.getItem('activeColor') || 'all';
                 this.minPrice = localStorage.getItem('minPrice') || 500;
                 this.maxPrice = localStorage.getItem('maxPrice') || 50000;
@@ -121,8 +121,6 @@
             localStorage.setItem('activeColor', this.activeColor);
             localStorage.setItem('minPrice', this.minPrice);
             localStorage.setItem('maxPrice', this.maxPrice);
-            localStorage.setItem('productsInCart', this.$store.state.products);
-
         }
     };
 
@@ -134,7 +132,6 @@
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    justify-content: space-between;
 
     &__item {
       padding: 5px;
@@ -146,7 +143,6 @@
       flex-direction: column;
       justify-content: space-between;
     }
-
   }
   .color-box {
     height: 20px;
@@ -154,8 +150,6 @@
     border-radius: 10px;
 
   }
-
-
 
   .check {
     display: flex;
@@ -166,7 +160,6 @@
     .check-colors {
       display: flex;
       flex: 1 1 50%;
-
     }
     .check-price {
       display: flex;

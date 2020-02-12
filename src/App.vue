@@ -49,7 +49,7 @@ export default {
 .wrapper {
   border-bottom: 1px solid #42b983;
   max-width: 960px;
-  margin: 0 auto;
+  margin: 5px auto;
   padding-bottom: 10px;
 }
 
@@ -63,7 +63,6 @@ ul {
 }
 
 li {
-  display: inline-block;
   margin: 0 10px;
 }
 
@@ -71,32 +70,6 @@ a {
   color: #42b983;
 }
 
-.about {
-  display: flex;
-
-  &__description {
-    display: flex;
-    flex: 1 1 33%;
-
-    h2 {
-      font-size: 32px;
-      font-weight: bold;
-    }
-  }
-
-  &__text {
-    flex: 2 2 66%;
-  }
-    &__bottom{
-      display: flex;
-      align-items: flex-end;
-
-
-      &-item {
-        flex: 1 1 33%;
-      }
-    }
-}
 .colors{
     display:  flex;
     align-items: center;
@@ -151,6 +124,33 @@ footer {
   margin: 0;
   padding: 0;
   flex-grow: 1;
+}
+
+.about {
+  display: flex;
+
+  &__description {
+    display: flex;
+    flex: 1 1 33%;
+
+    h2 {
+      font-size: 32px;
+      font-weight: bold;
+    }
+  }
+
+  &__text {
+    flex: 2 2 66%;
+  }
+  &__bottom{
+    display: flex;
+    align-items: flex-end;
+
+
+    &-item {
+      flex: 1 1 33%;
+    }
+  }
 }
 
 
