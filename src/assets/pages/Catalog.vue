@@ -80,7 +80,7 @@
         },
 
         created(){
-                this.$store.dispatch('products/initStore');
+                this.$store.dispatch('products/INIT_STORE');
                 this.sorteredProducts = [...this.$store.state.products];
                 this.activeColor = localStorage.getItem('activeColor') || 'all';
                 this.minPrice = localStorage.getItem('minPrice') || 500;
@@ -90,9 +90,9 @@
         },
 
         methods: {
-            ...mapActions('cart',
+            ...mapActions('products',
                 {
-                    initStore: 'initStore'
+                    initStore: 'INIT_STORE' ,
                 }
             ),
             setRangeSlider() {

@@ -1,4 +1,10 @@
+import Vue from 'vue';
+import Vuex from 'vuex';
 import axios from 'axios';
+import {error} from "vue-resource/src/util";
+
+Vue.use(Vuex);
+
 
 export default {
   namespaced: true,
@@ -14,12 +20,14 @@ export default {
 
     },
   actions: {
-    initStore: ({commit}) => {
+    INIT_STORE: ({commit}) => {
       axios.get('items.json')
         .then(response => {
           commit('SET_STORE', response.data.items)
-        });
+        })
+        .catch(error => console.log(error));
     },
+
 
   },
 
