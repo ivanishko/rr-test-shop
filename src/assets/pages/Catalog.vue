@@ -79,22 +79,22 @@
             })
         },
 
-        created(){
+        mounted(){
                 this.$store.dispatch('products/INIT_STORE');
                 this.sorteredProducts = [...this.$store.state.products];
                 this.activeColor = localStorage.getItem('activeColor') || 'all';
                 this.minPrice = localStorage.getItem('minPrice') || 500;
                 this.maxPrice = localStorage.getItem('maxPrice') || 50000;
-                this.sortProducts();
+              this.sortProducts();
 
         },
 
         methods: {
-            ...mapActions('products',
-                {
-                    initStore: 'INIT_STORE' ,
-                }
-            ),
+            // ...mapActions('products',
+            //     {
+            //         initStore: 'INIT_STORE' ,
+            //     }
+            // ),
             setRangeSlider() {
                 if (this.minPrice > this.maxPrice) {
                     let temp = this.maxPrice;
