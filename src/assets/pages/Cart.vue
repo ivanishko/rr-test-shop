@@ -43,7 +43,7 @@
         computed: {
             ...mapGetters('cart',{
                 cnt: 'cnt',
-                products: 'items'
+                products: 'productsInCart'
             })
         },
         methods: {
