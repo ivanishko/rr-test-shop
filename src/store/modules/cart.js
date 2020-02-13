@@ -1,26 +1,26 @@
 export default {
   namespaced: true,
   state: {
-    products: []
+    productsInCart: []
 
   },
   mutations: {
     add(state, product) {
-      if (state.products.indexOf(product) === -1) {
-        state.products.push(
+      if (state.productsInCart.indexOf(product) === -1) {
+        state.productsInCart.push(
           product
         );
       }
     },
     delete(state, id_product) {
-      let pos = state.products.indexOf(id_product);
+      let pos = state.productsInCart.indexOf(id_product);
       if (pos !== -1) {
-        state.products.splice(pos, 1);
+        state.productsInCart.splice(pos, 1);
 
       }
     },
     clear(state){
-      state.products = [];
+      state.productsInCart = [];
     }
   },
   actions: {
@@ -36,9 +36,9 @@ export default {
 
   },
   getters: {
-    items: state => state.products,
-    cnt: state => state.products.length,
-    total: state => state.products.reduce((sum, current) => {return sum + parseInt(current.cost)}, 0)
+    items: state => state.productsInCart,
+    cnt: state => state.productsInCart.length,
+    total: state => state.productsInCart.reduce((sum, current) => {return sum + parseInt(current.cost)}, 0)
 
       }
   }
