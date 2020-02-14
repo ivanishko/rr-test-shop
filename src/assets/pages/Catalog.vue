@@ -16,12 +16,12 @@
            class="color_box"
            :class="{ 'active-color': color === activeColor }"
            :style="{background: color}"
-           :key="i" @click="activeColor = color, sortProducts(color)">
+           :key="i" @click="activeColor = color, sortProducts()">
       </div>
       <div
         class="color-link"
         :class="{ 'active-color': 'all' === activeColor }"
-        @click="activeColor = 'all', sortProducts('all')">
+        @click="activeColor = 'all', sortProducts()">
         <span>Все</span>
       </div>
     </div>
@@ -79,20 +79,10 @@
             })
         },
 
-        mounted(){
-                this.$store.dispatch('products/INIT_STORE');
-                this.sorteredProducts = [...this.$store.state.products];
-                this.activeColor = localStorage.getItem('activeColor') || 'all';
-                this.minPrice = localStorage.getItem('minPrice') || 500;
-                this.maxPrice = localStorage.getItem('maxPrice') || 50000;
-              this.sortProducts();
-
-        },
-
         methods: {
             ...mapActions('products',
                 {
-                    initStore: 'INIT_STORE' ,
+                    initStore: 'loadItems' ,
                 }
             ),
             setRangeSlider() {
@@ -116,7 +106,17 @@
 
             }
         },
-
+        created(){
+            this.activeColor = localStorage.getItem('activeColor') || 'all';
+            this.minPrice = localStorage.getItem('minPrice') || 500;
+            this.maxPrice = localStorage.getItem('maxPrice') || 50000;
+            this.$store.dispatch('products/loadItems');
+            this.sorteredProducts = [...this.products];
+        },
+        mounted(){
+            console.log('mounted');
+            this.sortProducts();
+        },
         updated() {
             localStorage.setItem('activeColor', this.activeColor);
             localStorage.setItem('minPrice', this.minPrice);
