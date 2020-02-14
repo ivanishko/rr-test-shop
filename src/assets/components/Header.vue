@@ -37,29 +37,25 @@
     display: flex;
     justify-content: space-around;
     padding-bottom: 10px;
-  }
 
-  .logo {
-    display: inline-block;
-
-    &__title {
-      font-weight: 700;
-      text-transform: uppercase;
+    .logo {
+      display: inline-block;
+      &__title {
+        font-weight: 700;
+        text-transform: uppercase;
+      }
+    }
+    .checkout_count {
+      border: 1px solid #42b983;
+      padding: 0 5px;
+      text-decoration: none;
+      margin-left: 5px;
+    }
+    .active-link {
+      text-decoration: underline;
+    }
+    a {
+      text-decoration: none;
     }
   }
-  .checkout_count {
-    border: 1px solid #42b983;
-    padding: 0 5px;
-    text-decoration: none;
-    margin-left: 5px;
-
-  }
-  .active-link {
-         text-decoration: underline;
-       }
-  a {
-    text-decoration: none;
-  }
-
-
 </style>

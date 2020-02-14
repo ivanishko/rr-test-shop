@@ -1,12 +1,12 @@
 <template>
-  <div class="cart-page">
+  <div class="cart">
     <h1 class="page-title">Корзина</h1>
 
-  <div class="cart">
+  <div class="cart-box">
 
     <div v-if="cnt === 0">Добавьте товары в корзину</div>
-    <div v-else class="cart-page__items">
-      <div class="cart__item" v-for="(product, i) in products" :key="i">
+    <div v-else class="cart-box__items">
+      <div class="cart-box__item" v-for="(product, i) in products" :key="i">
         <button class="icon-delete" @click="deleteFromCart(product)">X</button>
 
         <div class="cart-image">
@@ -22,7 +22,7 @@
         </div>
       </div>
     </div>
-    <div v-if="cnt !== 0" class="cart-page__form">
+    <div v-if="cnt !== 0" class="cart-box__form">
       <Form  />
     </div>
   </div>
@@ -62,72 +62,81 @@
 </script>
 
 <style lang="scss" scoped>
-  .cart-page {
+  .cart {
     display: flex;
     flex-direction: column;
-    &__items {
-      flex: 2 2 66%;
-      margin-right: 10px;
-  }
-    &__form{
-    flex: 1 1 33%;
-    margin: 10px;
-  }
     .page-title {
       flex-grow: 1;
     }
-    .cart {
+
+    .cart-box {
       display: flex;
-      flex-direction: row;
-      &__item {
+
+      margin-right: 10px;
+      justify-content: space-between;
+
+      &__items {
         display: flex;
-        flex-direction: row;
-        border-bottom: 1px solid #bebebe;
-        position: relative;
-        padding: 10px 5px;
-        margin-bottom: 10px;
+        flex-direction: column;
+        flex: 2 2 66%;
+        .cart-box__item {
+          display: flex;
+          flex-direction: row;
+          border-bottom: 1px solid #bebebe;
+          position: relative;
+          padding: 10px 5px;
+          margin-bottom: 10px;
+
+          .color {
+            display: flex;
+            align-items: center;
+            &__box {
+              border:1px solid #d7d2d7;
+              border-radius: 10px;
+              width: 20px;
+              height: 20px;
+              margin: 0 5px;
+            }
+          }
+
+          button.icon-delete{
+            position: absolute;
+            top:0;
+            right:0;
+            cursor: pointer;
+            width: 25px;
+            height: 20px;
+            background: #ffffff;
+            :hover {
+              color: #2c3e50;
+            }
+          }
+
+
 
           .cart-image {
             display: flex;
             flex: 1 1 50%;
-        }
+          }
           .cart-info {
             display: flex;
             flex: 1 1 50%;
             flex-direction: column;
-          .price {
-            font-size: 32px;
+            .price {
+              font-size: 32px;
+            }
           }
         }
+
+      }
+      .cart-box__form{
+        display: flex;
+        flex: 1 1 33%;
+        margin: 10px;
       }
   }
-
-}
-
-.color {
-  display: flex;
-  align-items: center;
-  &__box {
-    border:1px solid #d7d2d7;
-    border-radius: 10px;
-    width: 20px;
-    height: 20px;
-    margin: 0 5px;
-  }
 }
 
 
-button.icon-delete{
-  position: absolute;
-  top:0;
-  right:0;
-  cursor: pointer;
-  width: 25px;
-  height: 20px;
-  background: #ffffff;
-  :hover {
-    color: #2c3e50;
-  }
-}
 
 </style>

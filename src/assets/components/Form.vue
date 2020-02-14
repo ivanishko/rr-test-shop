@@ -1,13 +1,16 @@
 <template>
     <div class="form-box">
-      <h3>Оформление заказа</h3>
-      <div class="form-box__item"><span>Количество: </span> <span>{{cnt}}</span></div>
-      <div class="form-box__item"><span>Доставка: </span> <span>{{delivery}}</span></div>
-      <div class="form-box__item"><span>Итого: </span><span>{{total | formatPrice}}</span></div>
-      <div class="form-box__item"><input type="text" class="input-item" placeholder="ФИО" v-model="order.name" minlength="3" maxlength="20" pattern="[a-z]{3,20}"  /></div>
-      <div class="form-box__item"><input type="tel" v-phone class="input-item" placeholder="(555)555-5555" v-model="order.phone" name="phone" id="phone" maxlength="14"  /></div>
-      <div class="form-box__item"><button class="input-item" @click="send(order.name,order.phone)">Заказать</button></div>
+      <div class="form-box__items">
+        <h3>Оформление заказа</h3>
+        <div class="form-box__item"><span>Количество: </span> <span>{{cnt}}</span></div>
+        <div class="form-box__item"><span>Доставка: </span> <span>{{delivery}}</span></div>
+        <div class="form-box__item"><span>Итого: </span><span>{{total | formatPrice}}</span></div>
+        <div class="form-box__item"><input type="text" class="input-item" placeholder="ФИО" v-model="order.name" minlength="3" maxlength="20" pattern="[a-z]{3,20}"  /></div>
+        <div class="form-box__item"><input type="tel" v-phone class="input-item" placeholder="(555)555-5555" v-model="order.phone" name="phone" id="phone" maxlength="14"  /></div>
+        <div class="form-box__item"><button class="input-item" @click="send(order.name,order.phone)">Заказать</button></div>
+      </div>
     </div>
+
 </template>
 
 <script>
@@ -100,8 +103,11 @@
 <style lang="scss" scoped>
 
 .form-box {
-  border: 1px solid #bebebe;
   padding: 5px;
+  min-width: 100%;
+  .form-box__items {
+    border: 1px solid #bebebe;
+  }
   &__item {
     display: flex;
     width: inherit;
@@ -118,14 +124,15 @@
   button.input-item {
     margin-top: 10px ;
   }
-}
-h3 {
-  text-align: center;
-}
+  h3 {
+    text-align: center;
+  }
   .errors-list {
     list-style: square;
     display: block;
     color: red;
   }
+}
+
 
 </style>
