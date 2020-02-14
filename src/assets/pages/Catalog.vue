@@ -90,11 +90,11 @@
         },
 
         methods: {
-            // ...mapActions('products',
-            //     {
-            //         initStore: 'INIT_STORE' ,
-            //     }
-            // ),
+            ...mapActions('products',
+                {
+                    initStore: 'INIT_STORE' ,
+                }
+            ),
             setRangeSlider() {
                 if (this.minPrice > this.maxPrice) {
                     let temp = this.maxPrice;
