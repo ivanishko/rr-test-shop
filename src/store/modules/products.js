@@ -12,7 +12,7 @@ export default {
   },
 
   mutations: {
-    loadItems(state, data){
+    LOAD_STORE(state, data){
       state.items = data.items;
     }
   },
@@ -21,7 +21,7 @@ export default {
       Vue.http.get('items.json')
         .then(response => response.json())
         .then(data => {
-          store.commit('loadItems', data);
+          store.commit('LOAD_STORE', data);
         });
     }
   },

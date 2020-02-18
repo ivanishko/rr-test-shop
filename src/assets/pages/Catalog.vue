@@ -106,12 +106,13 @@
 
             }
         },
+        beforeCreate(){
+            this.$store.dispatch('products/loadItems');
+        },
         created(){
             this.activeColor = localStorage.getItem('activeColor') || 'all';
             this.minPrice = localStorage.getItem('minPrice') || 500;
             this.maxPrice = localStorage.getItem('maxPrice') || 50000;
-            this.$store.dispatch('products/loadItems');
-            this.sorteredProducts = [...this.products];
         },
         mounted(){
             console.log('mounted');
