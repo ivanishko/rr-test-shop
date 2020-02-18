@@ -79,16 +79,6 @@
             })
         },
 
-        mounted(){
-                this.$store.dispatch('products/INIT_STORE');
-                this.sorteredProducts = [...this.$store.state.products];
-                this.activeColor = localStorage.getItem('activeColor') || 'all';
-                this.minPrice = localStorage.getItem('minPrice') || 500;
-                this.maxPrice = localStorage.getItem('maxPrice') || 50000;
-              this.sortProducts();
-
-        },
-
         methods: {
             ...mapActions('products',
                 {
@@ -115,6 +105,14 @@
                     })
 
             }
+        },
+        mounted(){
+            this.$store.dispatch('products/INIT_STORE');
+            this.activeColor = localStorage.getItem('activeColor') || 'all';
+            this.minPrice = localStorage.getItem('minPrice') || 500;
+            this.maxPrice = localStorage.getItem('maxPrice') || 50000;
+            this.sortProducts();
+
         },
 
         updated() {

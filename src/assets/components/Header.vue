@@ -6,8 +6,8 @@
     </router-link>
   </div>
   <div class="menu">
-    <router-link active-class="active-link" :to="{name: 'Catalog'}">Каталог</router-link>
     <router-link active-class="active-link" :to="{name: 'About'}">О нас</router-link>
+    <router-link active-class="active-link" :to="{name: 'Catalog'}">Каталог</router-link>
   </div>
     <div><router-link active-class="active-link" :to="{name: 'Cart'}">Корзина</router-link><span class="checkout_count">{{cnt}}</span></div>
   <div>
