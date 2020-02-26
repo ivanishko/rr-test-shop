@@ -10,7 +10,11 @@ export default {
   namespaced: true,
 
   state: {
-    items: {}
+    items: []
+  },
+  getters: {
+    items: state => state.items
+
   },
 
   mutations: {
@@ -23,16 +27,14 @@ export default {
     INIT_STORE: ({commit}) => {
       axios.get('items.json')
         .then(response => {
+          console.log(response.data.items);
           commit('SET_STORE', response.data.items)
         })
         .catch(error => console.log(error));
     },
 
 
-  },
-
-  getters: {
-    items: state => state.items
-
   }
+
+
 }

@@ -75,8 +75,8 @@
                     alert(errors.join('\r\n'))
                 }
                 if (this.errors.length === 0) {
-                    setTimeout(orderIsDone,5000, name);
-                    setTimeout(this.clearCart,5000, '');
+                    setTimeout(orderIsDone,500, name);
+                    setTimeout(this.clearCart,500, '');
 
 
                 }

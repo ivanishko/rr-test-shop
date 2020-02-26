@@ -34,13 +34,13 @@
     </div>
   </div>
 
-  <div v-if="sorteredProducts.length === 0">
+  <div v-if="sortProducts().length === 0">
     <p>Нет товаров с выбранными параметрами</p>
   </div>
   <div v-else>
     <div class="products">
       <Product
-        v-for="product in sorteredProducts"
+        v-for="product in sortProducts()"
         :key="product.id"
         :product_id="product.id"
         :title="product.title"
@@ -68,7 +68,6 @@
           return {
               activeColor: '',
               colors: ["black", "white", "red", "blue", "green"],
-              sorteredProducts: [],
               minPrice: '',
               maxPrice: '',
           }
@@ -95,18 +94,21 @@
             },
 
             sortProducts() {
-                    this.sorteredProducts = [...this.products].filter((elem) => {
+                 console.log([...this.products]);
+                     let sorteredProducts = [...this.products].filter((elem) => {
                         if (this.activeColor !== 'all') {
                             return (elem.colors.indexOf(this.activeColor) !== -1) && parseInt(elem.cost) >= this.minPrice && parseInt(elem.cost) <= this.maxPrice
                         }
                         else {
                             return ( parseInt(elem.cost) >= this.minPrice && parseInt(elem.cost) <= this.maxPrice)
                         }
-                    })
+
+                    });
+                    return sorteredProducts;
 
             }
         },
-        mounted(){
+        created(){
             this.$store.dispatch('products/INIT_STORE');
             this.activeColor = localStorage.getItem('activeColor') || 'all';
             this.minPrice = localStorage.getItem('minPrice') || 500;
